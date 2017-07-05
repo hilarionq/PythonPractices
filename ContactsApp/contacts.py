@@ -23,6 +23,5 @@ class Supplier(Contact):
 
 class Friend(Contact):
     def __init__(self, name, email, phone):
-        self.name = name
-        self.email = email
+        super().__init__(name, email)
         self.phone = phone
