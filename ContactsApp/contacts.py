@@ -1,3 +1,10 @@
+class AddressHolder:
+    def __init__(self, street, city, state, zipcode):
+        self.street = street
+        self.city = city
+        self.state = state
+        self.zipcode = zipcode
+
 class ContactList(list):
     def search(self, name):
         '''Return all contacts that contain the search value in their name.'''
@@ -21,7 +28,8 @@ class Supplier(Contact):
         print("If this were a real system we would send "
         "'{}' order to '{}'".format(order, self.name))
 
-class Friend(Contact):
-    def __init__(self, name, email, phone):
-        super().__init__(name, email)
+class Friend(Contact,AddressHolder):
+    def __init__(self, name, email, phone, street, city, state, zipcode):
+        Contact.__init__(self, name, email)
+        AddressHolder.__init__(self,  street, city, state, zipcode)
         self.phone = phone
