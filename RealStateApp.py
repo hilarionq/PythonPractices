@@ -48,7 +48,7 @@ class Apartment(Property):
         return parent_init
     
     prompt_init = staticmethod(prompt_init)
-    
+
 def get_valid_imput(input_string, valid_options):
     input_string += "({}) ".format(", ".join(valid_options))
     response = input(input_string)
