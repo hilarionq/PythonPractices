@@ -13,7 +13,7 @@ class Property:
         print("bathrooms: {}". format(self.num_bathrooms))
         print()
     
-    def prompt_init(self):
+    def prompt_init():
         return dict(square_feet = input("Enter the square feet: "),
                     beds = input("Enter number of bedrooms: "),
                     baths = input("Enter number of bathrooms: "))
@@ -34,16 +34,10 @@ class Apartment(Property):
         print("laundry: %s" % self.laundry)
         print("has balcony: %s" % self.balcony)
 
-    def prompt_init(self):
+    def prompt_init():
         parent_init = Property.prompt_init()
-        laundry = ''
-        while laundry.lower() not in Apartment.valid_laundries:
-            laundry = input("What laundry facilities does the property have? ({})".format(", ".join(Apartment.valid_laundries)))
-            balcony = ''
-            
-            while balcony.lower() not in Apartment.valid_balconies:
-                balcony = input("Does the property have balcony? ({})".format(", ".join(Apartment.valid_balconies)))
-            
+        laundry = get_valid_input("What laundry facilities does the property have?", Apartment.valid_laundries)
+        balcony = get_valid_input("Does the property have balcony?", Apartment.valid_balconies)            
         parent_init.update({"laundry":laundry, "balcony":balcony})
         return parent_init
     
