@@ -1,29 +1,21 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul 11 11:55:07 2017
-
-@author: eduardo
-"""
+from Cursor import Cursor
 class Document:
     def __init__(self):
         self.characters = []
-        self.cursor = 0
+        self.cursor = Cursor(self)
         self.filename = ''
 
     def insert(self, character):
-        self.characters.insert(self.cursor, character)
-        self.cursor += 1
+        self.characters.insert(self.cursor.position, character)
+        self.cursor.forward()
 
     def delete(self):
-        del self.characters[self.cursor]
+        del self.characters[self.cursor.position]
 
     def save(self):
-        with open(self.filename, 'w') as f:
-            f.write(''.join(self.characters))
+        f = open(self.filename, 'w')
+        f.write(''.join(self.characters))
+        f.close()
     
-    def forward(self):
-        self.cursor += 1
-
-    def back(self):
-        self.cursor -= 1
+    def __str__(self):
+        return "".join(self.characters)
